@@ -8,7 +8,9 @@ const Byte = (props) => {
     .reverse()
     .map((bit, index) => {
       return (
-        <Button className="m-2"
+        <Button
+          className="m-2 rounded"
+          style={{ boxShadow: "4px 4px rgba(0,0,0,.3)" }}
           variant={bit ? "dark" : "light"}
           size="lg"
         >
@@ -29,7 +31,7 @@ const Byte = (props) => {
 const Keypad = (props) => {
   return (
     <div className="d-flex bg-success rounded-pill justify-content-around">
-      <ButtonGroup>
+      <ButtonGroup >
         <Button
           onClick={props.increment}
           className="btn m-2 mx-5 border btn-danger rounded btn-lg"

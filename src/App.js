@@ -30,6 +30,7 @@ class App extends Component {
       token: "~",
       number: this.getNumber(newByte),
     };
+    
     this.setState((currentState) => {
       return {
         byte: newByte,

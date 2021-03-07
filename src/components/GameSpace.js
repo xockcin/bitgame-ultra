@@ -37,7 +37,8 @@ const GameSpace = (props) => {
   }
   return (
     <div className="d-flex">
-      <div className="bg-success text-white border rounded m-4 shadow">
+      <div
+        className="bg-success text-white border rounded m-4 shadow">
         <h1 className="p-1 m-0 display-1">{props.origin}</h1>
       </div>
       <div className="d-flex">
