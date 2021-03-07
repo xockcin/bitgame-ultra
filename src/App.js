@@ -1,25 +1,229 @@
-import logo from './logo.svg';
-import './App.css';
+import "bootstrap/dist/css/bootstrap.min.css";
+import "./App.css";
+import React, { Component } from "react"
+import GameSpace from "./components/GameSpace"
+import GameBoard from "./components/GameBoard"
+import JukeBox from "./components/JukeBox";
+import StepCounter from "./components/StepCounter";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      byte: [false, false, false, false, false, false, false, false],
+      steps: [],
+      origin: Math.floor(Math.random() * 256),
+      goal: Math.floor(Math.random() * 256),
+    };
+
+    this.complement = this.complement.bind(this)
+    this.shiftLeft = this.shiftLeft.bind(this)
+    this.shiftRight = this.shiftRight.bind(this)
+    this.increment = this.increment.bind(this)
+    this.decrement = this.decrement.bind(this)
+    this.reset = this.reset.bind(this)
+  }
+
+  complement() {
+    const newByte = this.state.byte.map((bit) => !bit);
+    const newStep = {
+      token: "~",
+      number: this.getNumber(newByte),
+    };
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        steps: currentState.steps.concat(newStep),
+      };
+    });
+  }
+
+  shiftLeft() {
+    const newByte = [false].concat(this.state.byte.slice(0, -1));
+    const newStep = {
+      token: "<",
+      number: this.getNumber(newByte),
+    };
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        steps: currentState.steps.concat(newStep),
+      };
+    });
+  }
+
+  shiftRight() {
+    const newByte = this.state.byte.slice(1).concat(false);
+    const newStep = {
+      token: ">",
+      number: this.getNumber(newByte),
+    };
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        steps: currentState.steps.concat(newStep),
+      };
+    });
+  }
+
+  increment() {
+    const number = this.getNumber(this.state.byte);
+    const newByte = this.fromNumber(number + 1)
+    const newStep = {
+      token: "+",
+      number: this.getNumber(newByte),
+    };
+    
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        steps: currentState.steps.concat(newStep),
+      };
+    });
+  }
+
+  decrement() {
+    const number = this.getNumber(this.state.byte);
+    const newByte = this.fromNumber(number - 1);
+    const newStep = {
+      token: "-",
+      number: this.getNumber(newByte),
+    };
+    
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        steps: currentState.steps.concat(newStep),
+      }
+    })
+  }
+
+  fromNumber(number) {
+    const newByte = [];
+    for (let i = 0; i < 8; i++) {
+      newByte[i] = !!(number & (1 << i));
+    }
+    return newByte
+  }
+
+  getNumber(byte) {
+    let num = 0;
+    for (let i = 0; i < 8; i++) {
+      num += byte[i] << i;
+    }
+    return num;
+  }
+
+  getAscii(num) {
+    const special = [
+      "NUL",
+      "SOH",
+      "STX",
+      "ETX",
+      "EOT",
+      "ENQ",
+      "ACK",
+      "BEL",
+      "BS",
+      "TAB",
+      "LF",
+      "VT",
+      "FF",
+      "CR",
+      "SO",
+      "SI",
+      "DLE",
+      "DC1",
+      "DC2",
+      "DC3",
+      "DC4",
+      "NAK",
+      "SYN",
+      "ETB",
+      "CAN",
+      "EM",
+      "SUB",
+      "ESC",
+      "FS",
+      "GS",
+      "RS",
+      "US",
+      "SP",
+    ];
+
+    if (num < 33) {
+      return special[num];
+    } else if (num === 127) {
+      return "DEL";
+    } else {
+      return String.fromCharCode(num);
+    }
+  }
+
+  reset() {
+    const newOrigin = Math.floor(Math.random() * 256);
+    const newGoal = Math.floor(Math.random() * 256);
+    const newSteps = [];
+    const newByte = this.fromNumber(newOrigin);
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        origin: newOrigin,
+        goal: newGoal,
+        steps: newSteps
+      };
+    });
+  }
+
+  componentWillMount() {
+    this.setState((currentState) => {
+      return {
+        byte: this.fromNumber(this.state.origin)
+      };
+    });
+  }
+
+  render() {
+    const number = this.getNumber(this.state.byte);
+    const hex = number.toString(16);
+    const ascii = this.getAscii(number);
+
+    return (
+      <div
+        className="container-flex p-2"
+        style={{ background: "linear-gradient(teal, purple)" }}
+      >
+        <StepCounter
+          className="m-3"
+          stepCount={this.state.steps.length} />
+        <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
+          <GameSpace
+            number={number}
+            hex={hex}
+            ascii={ascii}
+            origin={this.state.origin}
+            goal={this.state.goal}
+            steps={this.state.steps}
+            reset={this.reset}
+          />
+        </div>
+        <GameBoard
+          byte={this.state.byte}
+          complement={this.complement}
+          shiftLeft={this.shiftLeft}
+          shiftRight={this.shiftRight}
+          increment={this.increment}
+          decrement={this.decrement}
+        />
+        <hr />
+        <div className="container-flex d-flex justify-content-center p-3">
+          <JukeBox />
+          
+        </div>
+      </div>
+    );
+  }
 }
 
 export default App;
+
