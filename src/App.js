@@ -5,6 +5,8 @@ import GameSpace from "./components/GameSpace"
 import GameBoard from "./components/GameBoard"
 import JukeBox from "./components/JukeBox";
 import StepCounter from "./components/StepCounter";
+import ModeSwitch from "./components/ModeSwitch"
+import InfoButton from "./components/InfoButton"
 
 class App extends Component {
   constructor(props) {
@@ -190,12 +192,8 @@ class App extends Component {
     const ascii = this.getAscii(number);
 
     return (
-      <div
-        className="container-flex p-2"
-      >
-        <StepCounter
-          className="m-3"
-          stepCount={this.state.steps.length} />
+      <div className="container p-2 my-5 border rounded">
+        <div className="row p-3"></div>
         <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
           <GameSpace
             number={number}
@@ -207,18 +205,24 @@ class App extends Component {
             reset={this.reset}
           />
         </div>
-        <GameBoard
-          byte={this.state.byte}
-          complement={this.complement}
-          shiftLeft={this.shiftLeft}
-          shiftRight={this.shiftRight}
-          increment={this.increment}
-          decrement={this.decrement}
-        />
+        <div className="container d-inline-flex align-items-center">
+          <InfoButton />
+          <GameBoard
+            byte={this.state.byte}
+            complement={this.complement}
+            shiftLeft={this.shiftLeft}
+            shiftRight={this.shiftRight}
+            increment={this.increment}
+            decrement={this.decrement}
+          />
+          <StepCounter
+            className="align-self-center ml-0"
+            stepCount={this.state.steps.length}
+          />
+        </div>
         <hr />
         <div className="container-flex d-flex justify-content-center p-3">
           <JukeBox />
-          
         </div>
       </div>
     );

@@ -21,7 +21,7 @@ const Byte = (props) => {
 
   return (
     <div className="d-flex bg-info rounded-pill justify-content-around">
-      <ButtonGroup>
+      <ButtonGroup className="p-2">
         {buttons}
       </ButtonGroup>
     </div>
@@ -30,7 +30,7 @@ const Byte = (props) => {
 
 const Keypad = (props) => {
   return (
-    <div className="d-flex bg-success rounded-pill justify-content-around">
+    <div className="container d-flex bg-success rounded-pill justify-content-around">
       <ButtonGroup>
         <Button
           onClick={props.increment}
@@ -69,7 +69,7 @@ const Keypad = (props) => {
 
 const GameBoard = (props) => {
   return (
-    <div class="container w-75 border rounded p-3 mt-4">
+    <div class="container w-75 border rounded p-3 mt-2">
       <Byte byte={props.byte} />
       <hr />
       <Keypad

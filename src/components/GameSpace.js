@@ -1,6 +1,8 @@
 import React from "react";
 import {Badge, Button} from "react-bootstrap"
 
+
+
 const Steps = (props) => {
   const content = props.steps.map((step) => {
         return (

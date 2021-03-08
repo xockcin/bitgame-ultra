@@ -3,11 +3,11 @@ import { Badge } from "react-bootstrap";
 
 const StepCounter = (props) => {
   return (
-    <div>
-      <h1>
-        <Badge variant="secondary">steps: {props.stepCount}</Badge>
-      </h1>
-    </div>
+      <div className="p-3">
+        <h1>
+          <Badge className="text-danger border border-danger" variant="warning">{props.stepCount}</Badge>
+        </h1>
+      </div>
   )
 }
 
