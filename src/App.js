@@ -16,6 +16,7 @@ class App extends Component {
       steps: [],
       origin: Math.floor(Math.random() * 256),
       goal: Math.floor(Math.random() * 256),
+      mode: "dec"
     };
 
     this.complement = this.complement.bind(this)
@@ -193,7 +194,10 @@ class App extends Component {
 
     return (
       <div className="container p-2 my-5 border rounded">
-        <div className="row p-3"></div>
+        <div className="d-flex p-2 rounded-pill border">
+          <h1 className="p-2 ml-3 text-white">bitgame</h1>
+          <ModeSwitch className="mr-auto" />
+        </div>
         <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
           <GameSpace
             number={number}
@@ -203,6 +207,7 @@ class App extends Component {
             goal={this.state.goal}
             steps={this.state.steps}
             reset={this.reset}
+            mode={this.state.mode}
           />
         </div>
         <div className="container d-inline-flex align-items-center">

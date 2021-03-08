@@ -1,33 +1,22 @@
-import React, { Component } from 'react'
-import { Form, Badge, FormCheck } from 'react-bootstrap'
+import React from "react";
+import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
-const SwitchBadge = (props) => {
+const ModeSwitch = (props) => {
   return (
-    <div className="">
-      <Form>
-        <FormCheck
-          custom
-          inline
-          type="switch"
-        />
-      </Form>
+    <div className="p-3 mr-1">
+      <div>
+        <ToggleButtonGroup 
+          className="border"
+          type="radio" 
+          name="options" 
+          defaultValue={1}>
+          <ToggleButton value={1}>dec</ToggleButton>
+          <ToggleButton value={2}>hex</ToggleButton>
+          <ToggleButton value={3}>ascii</ToggleButton>
+        </ToggleButtonGroup>
+      </div>
     </div>
-  )
-}
-
-class ModeSwitch extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      hexMode: false
-    }
-  }
-
-  render() { 
-    return (
-      <SwitchBadge />
-    );
-  }
-}
+  );
+};
 
 export default ModeSwitch;
