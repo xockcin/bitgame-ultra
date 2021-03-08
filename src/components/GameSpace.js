@@ -39,13 +39,13 @@ const GameSpace = (props) => {
     <div className="d-flex">
       <div
         className="bg-success text-white border rounded m-4 shadow">
-        <h1 className="p-1 m-0 display-1">{props.origin}</h1>
+        <h1 className="p-1 m-0">{props.origin}</h1>
       </div>
       <div className="d-flex">
         <Steps steps={props.steps} />
       </div>
       <div className="bg-danger text-white border rounded m-4 shadow">
-        <h1 className="p-1 m-0 display-1">{props.goal}</h1>
+        <h1 className="p-1 m-0">{props.goal}</h1>
       </div>
     </div>
   );
