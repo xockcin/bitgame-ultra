@@ -1,4 +1,5 @@
 import React from "react";
+import "../App.css";
 import { Container } from "react-bootstrap";
 import { Button, ButtonGroup } from "react-bootstrap";
 
@@ -10,9 +11,8 @@ const Byte = (props) => {
       return (
         <Button
           className="m-2 rounded"
-          style={{ boxShadow: "4px 4px rgba(0,0,0,.3)" }}
           variant={bit ? "dark" : "light"}
-          size="lg"
+          size="sm"
         >
           {7 - index}
         </Button>
@@ -31,34 +31,34 @@ const Byte = (props) => {
 const Keypad = (props) => {
   return (
     <div className="d-flex bg-success rounded-pill justify-content-around">
-      <ButtonGroup >
+      <ButtonGroup>
         <Button
           onClick={props.increment}
-          className="btn m-2 mx-5 border btn-danger rounded btn-lg"
+          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         >
           +
         </Button>
         <Button
           onClick={props.shiftLeft}
-          className="btn m-2 mx-5 border btn-danger rounded btn-lg"
+          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         >
           &lt;
         </Button>
         <Button
           onClick={props.complement}
-          className="btn m-2 mx-5 border btn-danger rounded btn-lg"
+          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         >
           ~
         </Button>
         <Button
           onClick={props.shiftRight}
-          className="btn m-2 mx-5 border btn-danger rounded btn-lg"
+          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         >
           &gt;
         </Button>
         <Button
           onClick={props.decrement}
-          className="btn m-2 mx-5 border btn-danger rounded btn-lg"
+          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         >
           -
         </Button>

@@ -192,7 +192,6 @@ class App extends Component {
     return (
       <div
         className="container-flex p-2"
-        style={{ background: "linear-gradient(teal, purple)" }}
       >
         <StepCounter
           className="m-3"

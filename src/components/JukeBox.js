@@ -1,3 +1,4 @@
+import "../App.css"
 import BandcampPlayer from "react-bandcamp";
 import {Container, Badge} from "react-bootstrap"
 
@@ -41,7 +42,6 @@ const JukeBox = (props) => {
         linkcol="blue"
         size="medium"
         width="50%"
-        style={{ opacity: "0.5" }}
       />
     </Container>
   );
