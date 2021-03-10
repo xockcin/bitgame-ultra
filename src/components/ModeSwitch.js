@@ -2,17 +2,29 @@ import React from "react";
 import { ToggleButtonGroup, ToggleButton } from "react-bootstrap";
 
 const ModeSwitch = (props) => {
+  const modes = ["dec","hex","ascii"]
   return (
     <div className="p-3 mr-1">
       <div>
-        <ToggleButtonGroup 
+        <ToggleButtonGroup
           className="border"
-          type="radio" 
-          name="options" 
-          defaultValue={1}>
-          <ToggleButton value={1}>dec</ToggleButton>
-          <ToggleButton value={2}>hex</ToggleButton>
-          <ToggleButton value={3}>ascii</ToggleButton>
+          type="radio"
+          name="modes"
+          defaultValue="dec"
+        >
+          {modes.map((mode) => {
+            return (
+              <ToggleButton
+                type="radio"
+                name="mode"
+                value={mode}
+                checked={mode === "dec"}
+                onClick={() => props.setMode(mode)}
+              >
+                {mode}
+              </ToggleButton>
+            )
+          })}
         </ToggleButtonGroup>
       </div>
     </div>

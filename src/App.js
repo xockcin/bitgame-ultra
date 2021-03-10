@@ -16,7 +16,7 @@ class App extends Component {
       steps: [],
       origin: Math.floor(Math.random() * 256),
       goal: Math.floor(Math.random() * 256),
-      mode: "dec"
+      mode: "hex"
     };
 
     this.complement = this.complement.bind(this)
@@ -25,6 +25,7 @@ class App extends Component {
     this.increment = this.increment.bind(this)
     this.decrement = this.decrement.bind(this)
     this.reset = this.reset.bind(this)
+    this.setMode = this.setMode.bind(this);
   }
 
   complement() {
@@ -164,6 +165,14 @@ class App extends Component {
     }
   }
 
+  setMode(newMode) {
+    this.setState((currentState) => {
+      return {
+        mode: newMode,
+      };
+    });
+  }
+
   reset() {
     const newOrigin = Math.floor(Math.random() * 256);
     const newGoal = Math.floor(Math.random() * 256);
@@ -183,8 +192,8 @@ class App extends Component {
     this.setState((currentState) => {
       return {
         byte: this.fromNumber(this.state.origin)
-      };
-    });
+      }
+    })
   }
 
   render() {
@@ -196,7 +205,9 @@ class App extends Component {
       <div className="container p-2 my-5 border rounded">
         <div className="d-flex p-2 rounded-pill border">
           <h1 className="p-2 ml-3 text-white">bitgame</h1>
-          <ModeSwitch className="mr-auto" />
+          <ModeSwitch
+          setMode={this.setMode}
+          mode={this.state.mode} />
         </div>
         <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
           <GameSpace
