@@ -7,7 +7,6 @@ const ModeSwitch = (props) => {
     <div className="p-3 mr-1">
       <div>
         <ToggleButtonGroup
-          className="border"
           type="radio"
           name="modes"
           defaultValue="dec"
@@ -15,6 +14,7 @@ const ModeSwitch = (props) => {
           {modes.map((mode) => {
             return (
               <ToggleButton
+                className="border"
                 type="radio"
                 name="mode"
                 value={mode}

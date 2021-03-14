@@ -16,7 +16,7 @@ class App extends Component {
       steps: [],
       origin: Math.floor(Math.random() * 256),
       goal: Math.floor(Math.random() * 256),
-      mode: "hex"
+      mode: "dec"
     };
 
     this.complement = this.complement.bind(this)
@@ -34,7 +34,6 @@ class App extends Component {
       token: "~",
       number: this.getNumber(newByte),
     };
-    
     this.setState((currentState) => {
       return {
         byte: newByte,
@@ -119,52 +118,6 @@ class App extends Component {
     return num;
   }
 
-  getAscii(num) {
-    const special = [
-      "NUL",
-      "SOH",
-      "STX",
-      "ETX",
-      "EOT",
-      "ENQ",
-      "ACK",
-      "BEL",
-      "BS",
-      "TAB",
-      "LF",
-      "VT",
-      "FF",
-      "CR",
-      "SO",
-      "SI",
-      "DLE",
-      "DC1",
-      "DC2",
-      "DC3",
-      "DC4",
-      "NAK",
-      "SYN",
-      "ETB",
-      "CAN",
-      "EM",
-      "SUB",
-      "ESC",
-      "FS",
-      "GS",
-      "RS",
-      "US",
-      "SP",
-    ];
-
-    if (num < 33) {
-      return special[num];
-    } else if (num === 127) {
-      return "DEL";
-    } else {
-      return String.fromCharCode(num);
-    }
-  }
-
   setMode(newMode) {
     this.setState((currentState) => {
       return {
@@ -199,7 +152,6 @@ class App extends Component {
   render() {
     const number = this.getNumber(this.state.byte);
     const hex = number.toString(16);
-    const ascii = this.getAscii(number);
 
     return (
       <div className="container p-2 my-5 border rounded">
@@ -213,7 +165,6 @@ class App extends Component {
           <GameSpace
             number={number}
             hex={hex}
-            ascii={ascii}
             origin={this.state.origin}
             goal={this.state.goal}
             steps={this.state.steps}

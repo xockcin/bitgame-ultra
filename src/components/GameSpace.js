@@ -1,6 +1,5 @@
 import React from "react";
 import {Badge, Button} from "react-bootstrap"
-import ModeSwitch from "./ModeSwitch"
 
 function getAscii(num) {
     const special = [
@@ -70,7 +69,7 @@ const Steps = (props) => {
               <Badge className="border" variant="primary">{display(step.number, props.mode)}</Badge>
             </h3>
           </div>
-        );
+        )
       })
   return (
     <div className="d-flex">
@@ -79,16 +78,53 @@ const Steps = (props) => {
   )
 }
 
+const Origin = (props) => {
+  return (
+    <div className="bg-success text-white border rounded m-4 shadow">
+      <h1 className="p-1 m-0">{display(props.origin, props.mode)}</h1>
+    </div>
+  );
+}
+
+const Goal = (props) => {
+  return (
+    <div className="bg-danger text-white border rounded m-4 shadow">
+      <h1 className="p-1 m-0">{display(props.goal, props.mode)}</h1>
+    </div>
+  )
+}
+
+const WinFrame = (props) => {
+  const content = props.steps.map((step) => {
+    return (
+      <div className="d-flex justify-content-around m-2">
+        <h3 className="align-self-center">
+          <Badge className="m-0 border text-danger border border-danger" variant="warning">
+            {step.token}
+          </Badge>
+        </h3>
+      </div>
+    )
+  })
+
+  return (
+    <>
+      <Origin origin={props.origin} mode={props.mode} />
+      {content}
+      <Goal goal={props.goal} mode={props.mode} />
+    </>
+  )
+}
+
 const GameSpace = (props) => {
   if (props.number === props.goal) {
     return (
-    <div className="d-flex bg-primary border mt-3 p-4 rounded-pill text-white">
-      <h1>
-        You made it from {props.origin} to {props.goal} in {props.steps.length} steps!
-      </h1>
+    <div className="d-flex border mt-3 p-4 rounded-pill text-white">
+      <WinFrame steps={props.steps} origin={props.origin} goal={props.goal} mode={props.mode}/>
       <Button
         onClick={props.reset}
-        className="ml-4 border rounded-pill shadow"
+        className="ml-4 border rounded-pill"
+        size="sm"
         variant="success">
         Play Again
       </Button>
@@ -97,15 +133,11 @@ const GameSpace = (props) => {
   }
   return (
     <div className="d-flex">
-      <div className="bg-success text-white border rounded m-4 shadow">
-        <h1 className="p-1 m-0">{display(props.origin, props.mode)}</h1>
-      </div>
+      <Origin origin={props.origin} mode={props.mode}/>
       <div className="d-flex">
         <Steps steps={props.steps} mode={props.mode} />
       </div>
-      <div className="bg-danger text-white border rounded m-4 shadow">
-        <h1 className="p-1 m-0">{display(props.goal, props.mode)}</h1>
-      </div>
+      <Goal goal={props.goal} mode={props.mode} />
     </div>
   );
 }
