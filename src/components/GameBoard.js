@@ -3,7 +3,10 @@ import "../App.css";
 import { Button, ButtonGroup } from "react-bootstrap";
 
 const Byte = (props) => {
-  const buttons = props.byte
+  const showGoal = props.showGoal
+  const toShow = showGoal ? props.goal : props.byte
+  console.log(toShow)
+  const buttons = toShow
     .slice(0)
     .reverse()
     .map((bit, index) => {
@@ -17,9 +20,9 @@ const Byte = (props) => {
         </Button>
       );
     });
-
+    const classes = "d-flex rounded-pill justify-content-around";
   return (
-    <div className="d-flex bg-info rounded-pill justify-content-around">
+    <div className={showGoal ? "bg-danger " + classes : "bg-info " + classes}>
       <ButtonGroup className="p-2">
         {buttons}
       </ButtonGroup>
@@ -69,7 +72,7 @@ const Keypad = (props) => {
 const GameBoard = (props) => {
   return (
     <div class="container w-75 border rounded p-3 mt-2">
-      <Byte byte={props.byte} />
+      <Byte byte={props.byte} goal={props.goal} showGoal={props.showGoal} />
       <hr />
       <Keypad
         complement={props.complement}

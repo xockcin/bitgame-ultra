@@ -88,7 +88,11 @@ const Origin = (props) => {
 
 const Goal = (props) => {
   return (
-    <div className="bg-danger text-white border rounded m-4 shadow">
+    <div 
+      className="bg-danger text-white border rounded m-4 shadow"
+      onMouseEnter={props.hoverHandler}
+      onMouseLeave={props.unhoverHandler}
+      >
       <h1 className="p-1 m-0">{display(props.goal, props.mode)}</h1>
     </div>
   )
@@ -137,7 +141,7 @@ const GameSpace = (props) => {
       <div className="d-flex">
         <Steps steps={props.steps} mode={props.mode} />
       </div>
-      <Goal goal={props.goal} mode={props.mode} />
+      <Goal goal={props.goal} mode={props.mode} hoverHandler={props.hoverHandler} unhoverHandler={props.unhoverHandler} />
     </div>
   );
 }

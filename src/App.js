@@ -16,16 +16,19 @@ class App extends Component {
       steps: [],
       origin: Math.floor(Math.random() * 256),
       goal: Math.floor(Math.random() * 256),
-      mode: "dec"
+      mode: "dec",
+      showGoal: false,
     };
 
-    this.complement = this.complement.bind(this)
-    this.shiftLeft = this.shiftLeft.bind(this)
-    this.shiftRight = this.shiftRight.bind(this)
-    this.increment = this.increment.bind(this)
-    this.decrement = this.decrement.bind(this)
-    this.reset = this.reset.bind(this)
+    this.complement = this.complement.bind(this);
+    this.shiftLeft = this.shiftLeft.bind(this);
+    this.shiftRight = this.shiftRight.bind(this);
+    this.increment = this.increment.bind(this);
+    this.decrement = this.decrement.bind(this);
+    this.reset = this.reset.bind(this);
     this.setMode = this.setMode.bind(this);
+    this.hoverHandler = this.hoverHandler.bind(this)
+    this.unhoverHandler = this.unhoverHandler.bind(this);
   }
 
   complement() {
@@ -72,12 +75,12 @@ class App extends Component {
 
   increment() {
     const number = this.getNumber(this.state.byte);
-    const newByte = this.fromNumber(number + 1)
+    const newByte = this.fromNumber(number + 1);
     const newStep = {
       token: "+",
       number: this.getNumber(newByte),
     };
-    
+
     this.setState((currentState) => {
       return {
         byte: newByte,
@@ -93,13 +96,13 @@ class App extends Component {
       token: "-",
       number: this.getNumber(newByte),
     };
-    
+
     this.setState((currentState) => {
       return {
         byte: newByte,
         steps: currentState.steps.concat(newStep),
-      }
-    })
+      };
+    });
   }
 
   fromNumber(number) {
@@ -107,7 +110,7 @@ class App extends Component {
     for (let i = 0; i < 8; i++) {
       newByte[i] = !!(number & (1 << i));
     }
-    return newByte
+    return newByte;
   }
 
   getNumber(byte) {
@@ -126,6 +129,22 @@ class App extends Component {
     });
   }
 
+  hoverHandler() {
+    this.setState((currentState) => {
+      return {
+        showGoal: true
+      };
+    });
+  }
+
+  unhoverHandler() {
+    this.setState((currentState) => {
+      return {
+        showGoal: false
+      };
+    });
+  }
+
   reset() {
     const newOrigin = Math.floor(Math.random() * 256);
     const newGoal = Math.floor(Math.random() * 256);
@@ -136,7 +155,7 @@ class App extends Component {
         byte: newByte,
         origin: newOrigin,
         goal: newGoal,
-        steps: newSteps
+        steps: newSteps,
       };
     });
   }
@@ -144,9 +163,9 @@ class App extends Component {
   componentWillMount() {
     this.setState((currentState) => {
       return {
-        byte: this.fromNumber(this.state.origin)
-      }
-    })
+        byte: this.fromNumber(this.state.origin),
+      };
+    });
   }
 
   render() {
@@ -157,9 +176,7 @@ class App extends Component {
       <div className="container p-2 my-5 border rounded">
         <div className="d-flex p-2 rounded-pill border">
           <h1 className="p-2 ml-3 text-white">bitgame</h1>
-          <ModeSwitch
-          setMode={this.setMode}
-          mode={this.state.mode} />
+          <ModeSwitch setMode={this.setMode} mode={this.state.mode} />
         </div>
         <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
           <GameSpace
@@ -170,6 +187,8 @@ class App extends Component {
             steps={this.state.steps}
             reset={this.reset}
             mode={this.state.mode}
+            hoverHandler={this.hoverHandler}
+            unhoverHandler={this.unhoverHandler}
           />
         </div>
         <div className="container d-inline-flex align-items-center">
@@ -181,6 +200,8 @@ class App extends Component {
             shiftRight={this.shiftRight}
             increment={this.increment}
             decrement={this.decrement}
+            goal={this.fromNumber(this.state.goal)}
+            showGoal={this.state.showGoal}
           />
           <StepCounter
             className="align-self-center ml-0"
