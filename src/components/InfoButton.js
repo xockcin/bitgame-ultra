@@ -14,7 +14,7 @@ const helpText = [
   "The green number is your origin. The red number is your goal.",
   "The object of the game is to transform the byte from the green number to the red number, using the five operators, in as few steps as possible.",
   "There are two ways to approach the game:",
-  "The first is mathematically, treating the numbers as quantities, left shift and right shift as doubling and halving and complement as distance from 255. In this case, it will be easier to use decimal mode.",
+  "The first is mathematically, treating the numbers as quantities, < and > as doubling and halving and ~ as distance from 255. In this case, it will be easier to use decimal mode.",
   "The second is treating the numbers as binary configurations, in which case it will be easier to use hex mode.",
   "Hover over the goal number to peek at its bit configuration.",
   "If you want to be really hardcore, try a few rounds in ASCII mode.",
@@ -39,7 +39,7 @@ const HelpCarousel = () => {
       </Carousel.Item>
     )})
   return (
-    <Carousel indicators={false} interval={null} className="p-4">
+    <Carousel fade indicators={false} interval={null} className="p-4">
       {carouselItems}
     </Carousel>
   );
