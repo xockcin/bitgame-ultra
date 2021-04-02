@@ -2,7 +2,7 @@ import React from "react";
 import "../App.css";
 import { Button, ButtonGroup } from "react-bootstrap";
 
-const Byte = (props) => {
+export const Byte = (props) => {
   const showGoal = props.showGoal
   const toShow = showGoal ? props.goal : props.byte
   console.log(toShow)

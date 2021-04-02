@@ -6,7 +6,7 @@ import GameBoard from "./components/GameBoard"
 import JukeBox from "./components/JukeBox";
 import StepCounter from "./components/StepCounter";
 import ModeSwitch from "./components/ModeSwitch"
-import InfoButton from "./components/InfoButton"
+import InfoButton, {PopoverButton} from "./components/InfoButton"
 
 class App extends Component {
   constructor(props) {
