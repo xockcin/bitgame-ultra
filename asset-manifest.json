@@ -1,25 +1,25 @@
 {
   "files": {
     "main.css": "/bitgame-ultra/static/css/main.3f76b159.chunk.css",
-    "main.js": "/bitgame-ultra/static/js/main.efefb842.chunk.js",
-    "main.js.map": "/bitgame-ultra/static/js/main.efefb842.chunk.js.map",
+    "main.js": "/bitgame-ultra/static/js/main.032d8a56.chunk.js",
+    "main.js.map": "/bitgame-ultra/static/js/main.032d8a56.chunk.js.map",
     "runtime-main.js": "/bitgame-ultra/static/js/runtime-main.aef84272.js",
     "runtime-main.js.map": "/bitgame-ultra/static/js/runtime-main.aef84272.js.map",
     "static/css/2.150d169a.chunk.css": "/bitgame-ultra/static/css/2.150d169a.chunk.css",
-    "static/js/2.3f028e05.chunk.js": "/bitgame-ultra/static/js/2.3f028e05.chunk.js",
-    "static/js/2.3f028e05.chunk.js.map": "/bitgame-ultra/static/js/2.3f028e05.chunk.js.map",
+    "static/js/2.d48b9d43.chunk.js": "/bitgame-ultra/static/js/2.d48b9d43.chunk.js",
+    "static/js/2.d48b9d43.chunk.js.map": "/bitgame-ultra/static/js/2.d48b9d43.chunk.js.map",
     "static/js/3.93eef071.chunk.js": "/bitgame-ultra/static/js/3.93eef071.chunk.js",
     "static/js/3.93eef071.chunk.js.map": "/bitgame-ultra/static/js/3.93eef071.chunk.js.map",
     "index.html": "/bitgame-ultra/index.html",
     "static/css/2.150d169a.chunk.css.map": "/bitgame-ultra/static/css/2.150d169a.chunk.css.map",
     "static/css/main.3f76b159.chunk.css.map": "/bitgame-ultra/static/css/main.3f76b159.chunk.css.map",
-    "static/js/2.3f028e05.chunk.js.LICENSE.txt": "/bitgame-ultra/static/js/2.3f028e05.chunk.js.LICENSE.txt"
+    "static/js/2.d48b9d43.chunk.js.LICENSE.txt": "/bitgame-ultra/static/js/2.d48b9d43.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.aef84272.js",
     "static/css/2.150d169a.chunk.css",
-    "static/js/2.3f028e05.chunk.js",
+    "static/js/2.d48b9d43.chunk.js",
     "static/css/main.3f76b159.chunk.css",
-    "static/js/main.efefb842.chunk.js"
+    "static/js/main.032d8a56.chunk.js"
   ]
 }
