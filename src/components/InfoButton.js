@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Badge, Modal, Popover, OverlayTrigger, Button, Carousel } from "react-bootstrap";
 
 const helpText = [
+  "Welcome to BITGAME ULTRA",
   "The byte is made up of eight bits.", 
   "Each bit can be either one or zero, either on or off.",
   "The ~ button reverses the value of each bit, so every zero becomes a one and every one becomes a zero.",
@@ -77,7 +78,7 @@ export const PopoverButton = () => {
 }
 
 const InfoButton = () => {
-  const [show, setShow] = useState(false);
+  const [show, setShow] = useState(true);
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 

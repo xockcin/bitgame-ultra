@@ -27,14 +27,14 @@ class App extends Component {
     this.decrement = this.decrement.bind(this);
     this.reset = this.reset.bind(this);
     this.setMode = this.setMode.bind(this);
-    this.hoverHandler = this.hoverHandler.bind(this)
+    this.hoverHandler = this.hoverHandler.bind(this);
     this.unhoverHandler = this.unhoverHandler.bind(this);
+    this.update = this.update.bind(this)
   }
 
-  complement() {
-    const newByte = this.state.byte.map((bit) => !bit);
+  update(newByte, token) {
     const newStep = {
-      token: "~",
+      token,
       number: this.getNumber(newByte),
     };
     this.setState((currentState) => {
@@ -43,66 +43,48 @@ class App extends Component {
         steps: currentState.steps.concat(newStep),
       };
     });
+  }
+
+  complement() {
+    const newByte = this.state.byte.map((bit) => !bit)
+    this.update(newByte)
   }
 
   shiftLeft() {
     const newByte = [false].concat(this.state.byte.slice(0, -1));
-    const newStep = {
-      token: "<",
-      number: this.getNumber(newByte),
-    };
-    this.setState((currentState) => {
-      return {
-        byte: newByte,
-        steps: currentState.steps.concat(newStep),
-      };
-    });
+    this.update(newByte)
   }
 
   shiftRight() {
     const newByte = this.state.byte.slice(1).concat(false);
-    const newStep = {
-      token: ">",
-      number: this.getNumber(newByte),
-    };
-    this.setState((currentState) => {
-      return {
-        byte: newByte,
-        steps: currentState.steps.concat(newStep),
-      };
-    });
+    this.update(newByte);
   }
 
   increment() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number + 1);
-    const newStep = {
-      token: "+",
-      number: this.getNumber(newByte),
-    };
+    this.update(newByte);
+  }
 
-    this.setState((currentState) => {
-      return {
-        byte: newByte,
-        steps: currentState.steps.concat(newStep),
-      };
-    });
+  incrementAlt() {
+    let newByte = this.state.byte
+    for (let i = 0; i < 8; i++) {
+      if (!newByte[i]) {
+        newByte[i] = !newByte[i]
+        break
+      }
+      else {
+        newByte[i] = !newByte[i]
+        continue
+      }
+    }
+    this.update(newByte);
   }
 
   decrement() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number - 1);
-    const newStep = {
-      token: "-",
-      number: this.getNumber(newByte),
-    };
-
-    this.setState((currentState) => {
-      return {
-        byte: newByte,
-        steps: currentState.steps.concat(newStep),
-      };
-    });
+    this.update(newByte);
   }
 
   fromNumber(number) {
@@ -132,7 +114,7 @@ class App extends Component {
   hoverHandler() {
     this.setState((currentState) => {
       return {
-        showGoal: true
+        showGoal: true,
       };
     });
   }
@@ -140,7 +122,7 @@ class App extends Component {
   unhoverHandler() {
     this.setState((currentState) => {
       return {
-        showGoal: false
+        showGoal: false,
       };
     });
   }
