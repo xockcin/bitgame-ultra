@@ -90,3 +90,5 @@ I am very excited about this project. For a while I kept trying to work on other
 1. Implement counting down instead of up. Make a lose frame that shows up if you lose.
 2. Create an introductory version that explains the concept with one, two and four bits.
 3. Separate out the compoments.
+
+Okay, I have now changed the game so that the game counts down instead of up, and you lose if you don't solve the puzzle in the required number of steps. You can also cheat by clicking on the step counter.
