@@ -1,19 +1,9 @@
 import "../App.css"
 import {useState} from "react"
-import BandcampPlayer from "react-bandcamp";
-import {Container, Popover, Overlay} from "react-bootstrap"
+import BandcampPlayer from "react-bandcamp"
+import {Container} from "react-bootstrap"
+import { Popover, PopoverHeader, PopoverBody } from 'reactstrap'
 
-
-
-const popover = (
-  <Popover id="popover-basic">
-    <Popover.Title as="h3">Popover right</Popover.Title>
-    <Popover.Content>
-      And here's some <strong>amazing</strong> content. It's very engaging.
-      right?
-    </Popover.Content>
-  </Popover>
-);
 
 const albums = [
   "3114440086",
@@ -43,14 +33,34 @@ const albums = [
   "571360365",
   "370697788",
   "1274532837",
+  "4264078350",
 ];
 
 const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
 
+
+
 const JukeBox = (props) => {
+  const [popoverOpen, setPopoverOpen] = useState(false)
+  const toggle = () => setPopoverOpen(!popoverOpen)
+
   return (
-    <Container className="d-flex p-3 justify-content-center">
+    <Container
+      className="d-flex p-3 justify-content-center border"
+    >
+      <Popover
+        placement="bottom"
+        isOpen={popoverOpen}
+        target="Popover1"
+      >
+        <PopoverHeader>Popover Title</PopoverHeader>
+        <PopoverBody>
+          Sed posuere consectetur est at lobortis. Aenean eu leo quam.
+          Pellentesque ornare sem lacinia quam venenatis vestibulum.
+        </PopoverBody>
+      </Popover>
       <BandcampPlayer
+        onClick={toggle}
         BandcampPlayer
         album={randomAlbum}
         bgcol="blue"

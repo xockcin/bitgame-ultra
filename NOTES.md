@@ -53,3 +53,40 @@ NOTE: The increment algorithm looks like this:
 2. If this bit is off, turn it on and quit.
 3. If this bit is on, turn it off and look at the next bit.
 4. Go to step 2.
+
+### 4/3/21
+
+For some reason, all of a sudden the tokens aren't displaying in the step list, if you know what I mean by that. I'm not sure what could be causing this. Time to investigate!
+
+I fixed it. I think it would be a good exercise to explain what the problem was, but I don't feel like it! Maybe later.
+
+I spent most of yesterday working on a Python script to figure out the best solutions for all possible origin-goal combinations. Once I figure out the logic, I will probably port it over to Javascript, mainly just for the practice.
+
+Addendum: My Python script has produced a solution for every combination of two eight-bit numbers! It is all in a json file that I can access using fetch().
+
+### 4/4/21
+
+There is now a "cheat" function that fetches the solution from GitHub and displays it discreetly in a popover if you click on the step counter. Next step is to structure the game around it.
+
+Here are some next steps:
+1. Force the user to solve the puzzle in the minimum number of steps. Change the step counter so that it counts down instead of up. If you fail, there are two buttons: try this pair again or try a different pair.
+2. Put the documentation in popovers instead of a modal.
+3. Just generally refactor and clean up everything. The code is very messy. The app component is way overloaded. I should consider putting it in Redux. Would be good practice, anyway.
+
+Brainstorms: 
+1. Create a huge grid in which the player can view all 65536 combinations. At first it just looks like a huge grid of tiny, different-colored squares, with colors representing how many steps the solution is. Eventually it will keep track of each individual player's solving history.
+2. It will be possible to earn the use of special buttons that could perform other operations on the bits, for instance:
+- flipping the byte back-to-front
+- flipping the four high bits and the four low bits
+- save a number in a register, and then combining it with the current number using a binary (as in two-parameter) operator like & or ^.
+- "pac-man mode" - make left and right shift wrap around.
+These powers would be associated with the ASCII values of certain numbers, which you would need to "grab."
+3. It might be a good idea to have the game start with just one and two bytes. In stage one there is just one bit, and you practice turning it on and off. In stage two there are two bits, and you learn about shifting. In stage three there are four bits, and you learn about addition and subtraction, and also about hexadecimal notation. Then in stage four there are eight bits and the game is underway.
+
+### 4/5/21
+
+I am very excited about this project. For a while I kept trying to work on other things instead, but I kept coming back to this one. I should make it my main project. Here are the next steps:
+
+1. Implement counting down instead of up. Make a lose frame that shows up if you lose.
+2. Create an introductory version that explains the concept with one, two and four bits.
+3. Separate out the compoments.

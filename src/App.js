@@ -18,6 +18,7 @@ class App extends Component {
       goal: Math.floor(Math.random() * 256),
       mode: "dec",
       showGoal: false,
+      cheat: ""
     };
 
     this.complement = this.complement.bind(this);
@@ -30,6 +31,17 @@ class App extends Component {
     this.hoverHandler = this.hoverHandler.bind(this);
     this.unhoverHandler = this.unhoverHandler.bind(this);
     this.update = this.update.bind(this)
+    this.cheat = this.cheat.bind(this)
+  }
+
+  cheat(origin, goal) {
+    fetch(
+      "https://raw.githubusercontent.com/xockcin/bitgame/main/pairchart.json"
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        this.setState({cheat: data[origin][goal]["steps"]})
+      })
   }
 
   update(newByte, token) {
@@ -47,44 +59,29 @@ class App extends Component {
 
   complement() {
     const newByte = this.state.byte.map((bit) => !bit)
-    this.update(newByte)
+    this.update(newByte, '~')
   }
 
   shiftLeft() {
     const newByte = [false].concat(this.state.byte.slice(0, -1));
-    this.update(newByte)
+    this.update(newByte, '<')
   }
 
   shiftRight() {
     const newByte = this.state.byte.slice(1).concat(false);
-    this.update(newByte);
+    this.update(newByte, '>');
   }
 
   increment() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number + 1);
-    this.update(newByte);
-  }
-
-  incrementAlt() {
-    let newByte = this.state.byte
-    for (let i = 0; i < 8; i++) {
-      if (!newByte[i]) {
-        newByte[i] = !newByte[i]
-        break
-      }
-      else {
-        newByte[i] = !newByte[i]
-        continue
-      }
-    }
-    this.update(newByte);
+    this.update(newByte, '+');
   }
 
   decrement() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number - 1);
-    this.update(newByte);
+    this.update(newByte, '-');
   }
 
   fromNumber(number) {
@@ -130,6 +127,7 @@ class App extends Component {
   reset() {
     const newOrigin = Math.floor(Math.random() * 256);
     const newGoal = Math.floor(Math.random() * 256);
+    this.cheat(newOrigin, newGoal);
     const newSteps = [];
     const newByte = this.fromNumber(newOrigin);
     this.setState((currentState) => {
@@ -148,6 +146,7 @@ class App extends Component {
         byte: this.fromNumber(this.state.origin),
       };
     });
+    this.cheat(this.state.origin, this.state.goal)
   }
 
   render() {
@@ -171,6 +170,7 @@ class App extends Component {
             mode={this.state.mode}
             hoverHandler={this.hoverHandler}
             unhoverHandler={this.unhoverHandler}
+            stepCount={this.state.cheat.length - this.state.steps.length}
           />
         </div>
         <div className="container d-inline-flex align-items-center">
@@ -187,7 +187,8 @@ class App extends Component {
           />
           <StepCounter
             className="align-self-center ml-0"
-            stepCount={this.state.steps.length}
+            stepCount={this.state.cheat.length - this.state.steps.length}
+            cheat={this.state.cheat}
           />
         </div>
         <hr />

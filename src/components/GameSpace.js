@@ -98,12 +98,50 @@ const Goal = (props) => {
   )
 }
 
-const WinFrame = (props) => {
+const ResetButton = (props) => {
+  return (
+    <Button
+      onClick={props.reset}
+      className="ml-4 border rounded-pill"
+      size="sm"
+      variant={props.win ? "success" : "danger"}
+    >
+      {props.win ? "Play Again" : "Try Again"}
+    </Button>
+  )
+}
+
+const LoseButton = (props) => {
+  return (
+    <div className="d-flex flex-column">
+      <Button
+        onClick={props.reset}
+        className="ml-4 mt-3 border rounded-pill"
+        size="sm"
+        variant="success"
+      >
+        Play Again
+      </Button>
+      <Button
+        onClick={props.reset}
+        className="ml-4 mt-3 border rounded-pill"
+        size="sm"
+        variant="danger"
+      >
+        Play Again
+      </Button>
+    </div>
+  )
+}
+
+const EndFrame = (props) => {
   const content = props.steps.map((step) => {
     return (
       <div className="d-flex justify-content-around m-2">
         <h3 className="align-self-center">
-          <Badge className="m-0 border text-danger border border-danger" variant="warning">
+          <Badge 
+            className="m-0 border text-danger border border-danger" 
+            variant={props.win ? "warning" : "dark"}>
             {step.token}
           </Badge>
         </h3>
@@ -112,36 +150,47 @@ const WinFrame = (props) => {
   })
 
   return (
-    <>
+    <div className="d-flex border mt-3 p-4 rounded-pill text-white">
       <Origin origin={props.origin} mode={props.mode} />
       {content}
       <Goal goal={props.goal} mode={props.mode} />
-    </>
-  )
+      <ResetButton reset={props.reset} win={props.win} />
+    </div>
+  );
+}
+
+const LoseFrame = (props) => {
+  return <h1>YOU LOSE</h1>
 }
 
 const GameSpace = (props) => {
-  if (props.number === props.goal) {
+
+  if (props.stepCount === 0) {
+    const win = (props.number === props.goal)
     return (
-    <div className="d-flex border mt-3 p-4 rounded-pill text-white">
-      <WinFrame steps={props.steps} origin={props.origin} goal={props.goal} mode={props.mode}/>
-      <Button
-        onClick={props.reset}
-        className="ml-4 border rounded-pill"
-        size="sm"
-        variant="success">
-        Play Again
-      </Button>
-    </div>
-    )
+      <EndFrame
+        reset={props.reset}
+        steps={props.steps}
+        origin={props.origin}
+        goal={props.goal}
+        mode={props.mode}
+        win={win}
+      />
+    );
   }
+
   return (
     <div className="d-flex">
-      <Origin origin={props.origin} mode={props.mode}/>
+      <Origin origin={props.origin} mode={props.mode} />
       <div className="d-flex">
         <Steps steps={props.steps} mode={props.mode} />
       </div>
-      <Goal goal={props.goal} mode={props.mode} hoverHandler={props.hoverHandler} unhoverHandler={props.unhoverHandler} />
+      <Goal
+        goal={props.goal}
+        mode={props.mode}
+        hoverHandler={props.hoverHandler}
+        unhoverHandler={props.unhoverHandler}
+      />
     </div>
   );
 }

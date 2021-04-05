@@ -5,7 +5,6 @@ import { Button, ButtonGroup } from "react-bootstrap";
 export const Byte = (props) => {
   const showGoal = props.showGoal
   const toShow = showGoal ? props.goal : props.byte
-  console.log(toShow)
   const buttons = toShow
     .slice(0)
     .reverse()

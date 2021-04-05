@@ -84,7 +84,7 @@ const InfoButton = () => {
 
   return (
     <>
-      <div className="p-3">
+      <div id="Popover1" className="p-3">
         <h1>
           <Badge
             type="button"
