@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/bitgame-ultra/static/css/main.3f76b159.chunk.css",
-    "main.js": "/bitgame-ultra/static/js/main.df067245.chunk.js",
-    "main.js.map": "/bitgame-ultra/static/js/main.df067245.chunk.js.map",
+    "main.js": "/bitgame-ultra/static/js/main.4a2203fc.chunk.js",
+    "main.js.map": "/bitgame-ultra/static/js/main.4a2203fc.chunk.js.map",
     "runtime-main.js": "/bitgame-ultra/static/js/runtime-main.973eea24.js",
     "runtime-main.js.map": "/bitgame-ultra/static/js/runtime-main.973eea24.js.map",
     "static/css/2.150d169a.chunk.css": "/bitgame-ultra/static/css/2.150d169a.chunk.css",
@@ -20,6 +20,6 @@
     "static/css/2.150d169a.chunk.css",
     "static/js/2.6212ca98.chunk.js",
     "static/css/main.3f76b159.chunk.css",
-    "static/js/main.df067245.chunk.js"
+    "static/js/main.4a2203fc.chunk.js"
   ]
 }
