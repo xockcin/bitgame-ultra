@@ -111,29 +111,6 @@ const ResetButton = (props) => {
   )
 }
 
-const LoseButton = (props) => {
-  return (
-    <div className="d-flex flex-column">
-      <Button
-        onClick={props.reset}
-        className="ml-4 mt-3 border rounded-pill"
-        size="sm"
-        variant="success"
-      >
-        Play Again
-      </Button>
-      <Button
-        onClick={props.reset}
-        className="ml-4 mt-3 border rounded-pill"
-        size="sm"
-        variant="danger"
-      >
-        Play Again
-      </Button>
-    </div>
-  )
-}
-
 const EndFrame = (props) => {
   const content = props.steps.map((step) => {
     return (
