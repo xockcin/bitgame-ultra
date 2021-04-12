@@ -34,7 +34,6 @@ const albums = [
   "4264078350",
   "1823832688",
   "249810342",
-  "2929730564"
 ];
 
 const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
