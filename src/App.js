@@ -7,6 +7,7 @@ import JukeBox from "./components/JukeBox";
 import StepCounter from "./components/StepCounter";
 import ModeSwitch from "./components/ModeSwitch"
 import InfoButton, {PopoverButton} from "./components/InfoButton"
+import DifficultySwitch from "./components/DifficultySwitch";
 
 class App extends Component {
   constructor(props) {
@@ -14,11 +15,12 @@ class App extends Component {
     this.state = {
       byte: [false, false, false, false, false, false, false, false],
       steps: [],
-      origin: Math.floor(Math.random() * 256),
-      goal: Math.floor(Math.random() * 256),
+      origin: 0,
+      goal: 0,
       mode: "dec",
       showGoal: false,
-      cheat: ""
+      cheat: "",
+      difficulty: 1
     };
 
     this.complement = this.complement.bind(this);
@@ -30,8 +32,9 @@ class App extends Component {
     this.setMode = this.setMode.bind(this);
     this.hoverHandler = this.hoverHandler.bind(this);
     this.unhoverHandler = this.unhoverHandler.bind(this);
-    this.update = this.update.bind(this)
-    this.cheat = this.cheat.bind(this)
+    this.update = this.update.bind(this);
+    this.cheat = this.cheat.bind(this);
+    this.setDifficulty = this.setDifficulty.bind(this)
   }
 
   cheat(origin, goal) {
@@ -40,8 +43,8 @@ class App extends Component {
     )
       .then((response) => response.json())
       .then((data) => {
-        this.setState({cheat: data[origin][goal]["steps"]})
-      })
+        this.setState({ cheat: data[origin][goal]["steps"] });
+      });
   }
 
   update(newByte, token) {
@@ -58,30 +61,30 @@ class App extends Component {
   }
 
   complement() {
-    const newByte = this.state.byte.map((bit) => !bit)
-    this.update(newByte, '~')
+    const newByte = this.state.byte.map((bit) => !bit);
+    this.update(newByte, "~");
   }
 
   shiftLeft() {
     const newByte = [false].concat(this.state.byte.slice(0, -1));
-    this.update(newByte, '<')
+    this.update(newByte, "<");
   }
 
   shiftRight() {
     const newByte = this.state.byte.slice(1).concat(false);
-    this.update(newByte, '>');
+    this.update(newByte, ">");
   }
 
   increment() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number + 1);
-    this.update(newByte, '+');
+    this.update(newByte, "+");
   }
 
   decrement() {
     const number = this.getNumber(this.state.byte);
     const newByte = this.fromNumber(number - 1);
-    this.update(newByte, '-');
+    this.update(newByte, "-");
   }
 
   fromNumber(number) {
@@ -104,8 +107,16 @@ class App extends Component {
     this.setState((currentState) => {
       return {
         mode: newMode,
-      };
-    });
+      }
+    })
+  }
+
+  setDifficulty(newDifficulty) {
+    this.setState((currentState) => {
+      return {
+        difficulty: newDifficulty,
+      }
+    })
   }
 
   hoverHandler() {
@@ -120,6 +131,44 @@ class App extends Component {
     this.setState((currentState) => {
       return {
         showGoal: false,
+      };
+    });
+  }
+
+  resetWithDifficulty() {
+    const difficulty = this.state.difficulty;
+    const sizes = [
+      255,
+      1271,
+      4065,
+      8617,
+      14503,
+      17862,
+      12984,
+      4745,
+      1054,
+      224,
+      31,
+    ];
+    const pairIndex = Math.floor(Math.random() * sizes[difficulty]);
+    let pair
+    fetch(
+      "https://raw.githubusercontent.com/xockcin/bitgame/main/length_index2.json"
+    )
+      .then((response) => response.json())
+      .then((data) => pair.push(...data[difficulty][pairIndex]))
+      .then((pair) => console.log(pair));
+    const newOrigin = pair[0];
+    const newGoal = pair[1];
+    this.cheat(newOrigin, newGoal);
+    const newSteps = [];
+    const newByte = this.fromNumber(newOrigin);
+    this.setState((currentState) => {
+      return {
+        byte: newByte,
+        origin: newOrigin,
+        goal: newGoal,
+        steps: newSteps,
       };
     });
   }
@@ -141,12 +190,7 @@ class App extends Component {
   }
 
   componentWillMount() {
-    this.setState((currentState) => {
-      return {
-        byte: this.fromNumber(this.state.origin),
-      };
-    });
-    this.cheat(this.state.origin, this.state.goal)
+    this.reset()
   }
 
   render() {
@@ -158,6 +202,7 @@ class App extends Component {
         <div className="d-flex p-2 rounded-pill border">
           <h1 className="p-2 ml-3 text-white">bitgame</h1>
           <ModeSwitch setMode={this.setMode} mode={this.state.mode} />
+          <DifficultySwitch className="mr-1" setDifficulty={this.setDifficulty} />
         </div>
         <div className="container-flex d-flex flex-row justify-content-around rounded-pill m-2">
           <GameSpace
