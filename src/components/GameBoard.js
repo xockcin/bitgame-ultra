@@ -1,13 +1,12 @@
 import React from "react";
 import "../App.css";
 import { Button, ButtonGroup } from "react-bootstrap";
+import { fromNumber } from "../shared/methods";
 
 export const Byte = (props) => {
-  const showGoal = props.showGoal
-  const toShow = showGoal ? props.goal : props.byte
-  const buttons = toShow
+  const toShow = props.showGoal ? props.goal : props.number
+  const buttons = fromNumber(toShow)
     .slice(0)
-    .reverse()
     .map((bit, index) => {
       return (
         <Button
@@ -15,71 +14,52 @@ export const Byte = (props) => {
           variant={bit ? "dark" : "light"}
           size="sm"
         >
-          {7 - index}
+          {index}
         </Button>
       );
     });
     const classes = "d-flex rounded-pill justify-content-around";
   return (
-    <div className={showGoal ? "bg-danger " + classes : "bg-info " + classes}>
-      <ButtonGroup className="p-2">
+    <div className={props.showGoal ? "bg-danger " + classes : "bg-info " + classes}>
+      <ButtonGroup className="p-2 d-flex flex-row-reverse">
         {buttons}
       </ButtonGroup>
     </div>
   );
 };
 
-const Keypad = (props) => {
+const Keypad = ({handleButton}) => {
+  const tokens = ["+", "<", "~", ">", "-"]
+  const buttons = tokens.map(token => {
+    return (
+      <Button 
+        className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
+        onClick={() => handleButton(token)}
+      >
+        {token}
+      </Button>
+    )
+  })
   return (
     <div className="container d-flex bg-success rounded-pill justify-content-around">
       <ButtonGroup>
-        <Button
-          onClick={props.increment}
-          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
-        >
-          +
-        </Button>
-        <Button
-          onClick={props.shiftLeft}
-          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
-        >
-          &lt;
-        </Button>
-        <Button
-          onClick={props.complement}
-          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
-        >
-          ~
-        </Button>
-        <Button
-          onClick={props.shiftRight}
-          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
-        >
-          &gt;
-        </Button>
-        <Button
-          onClick={props.decrement}
-          className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
-        >
-          -
-        </Button>
+        {buttons}
       </ButtonGroup>
     </div>
-  );
-};
+  )
+}
 
 const GameBoard = (props) => {
   return (
     <div class="container w-75 border rounded p-3 mt-2">
-      <Byte byte={props.byte} goal={props.goal} showGoal={props.showGoal} />
-      <hr />
-      <Keypad
-        complement={props.complement}
-        shiftLeft={props.shiftLeft}
-        shiftRight={props.shiftRight}
-        increment={props.increment}
-        decrement={props.decrement}
+      <Byte 
+        number={props.number}
+        byte={props.byte} 
+        goal={props.goal} 
+        showGoal={props.showGoal} 
       />
+      <hr />
+      <Keypad handleButton={props.handleButton} />
     </div>
   );
 };

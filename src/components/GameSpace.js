@@ -78,10 +78,10 @@ const Steps = (props) => {
   )
 }
 
-const Origin = (props) => {
+const Origin = ({origin, mode}) => {
   return (
     <div className="bg-success text-white border rounded m-4 shadow">
-      <h1 className="p-1 m-0">{display(props.origin, props.mode)}</h1>
+      <h1 className="p-1 m-0">{display(origin, mode)}</h1>
     </div>
   );
 }
@@ -136,10 +136,6 @@ const EndFrame = (props) => {
   );
 }
 
-const LoseFrame = (props) => {
-  return <h1>YOU LOSE</h1>
-}
-
 const GameSpace = (props) => {
 
   if (props.stepCount === 0) {
@@ -147,6 +143,7 @@ const GameSpace = (props) => {
     return (
       <EndFrame
         reset={props.reset}
+        resetWithSame={props.resetWithSame}
         steps={props.steps}
         origin={props.origin}
         goal={props.goal}

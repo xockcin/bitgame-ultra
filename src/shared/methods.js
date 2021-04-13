@@ -1,4 +1,4 @@
-const doToken = (number, token, size) => {
+export const doToken = (number, token, size) => {
   switch (token) {
     case "+":
       return (number + 1) % size;
@@ -15,5 +15,15 @@ const doToken = (number, token, size) => {
       else {
         return number - 1
       }
+    default:
+      console.log("Invalid Token")
   }
+}
+
+export const fromNumber = (number) => {
+  const newByte = [];
+  for (let i = 0; i < 8; i++) {
+    newByte[i] = !!(number & (1 << i));
+  }
+  return newByte;
 }

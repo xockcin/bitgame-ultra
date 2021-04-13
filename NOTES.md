@@ -92,3 +92,18 @@ I am very excited about this project. For a while I kept trying to work on other
 3. Separate out the compoments.
 
 Okay, I have now changed the game so that the game counts down instead of up, and you lose if you don't solve the puzzle in the required number of steps. You can also cheat by clicking on the step counter.
+
+### 4/13/21
+
+I have been messing around with this project without documenting my messings very well. Today is a cleanup day. I am starting by moving the pure (i.e non-state-updating) functions into a separate file. I am also turning the five bitmove functions into one function that takes three arguments - a number, a "token" and a size - and returns the resulting number.
+
+The next step in the cleanup process, which may take a little while, will be to change the program so that the number is represented as a number rather than an array in the state, and is only converted into an array to create the byte that displays it.
+
+Note: I have succeeded in changing the program so that the Byte is a number. Difficulty also works.
+
+Here are the next things I need to do:
+1. Deal with the edge case of a user continuing to press the buttons after the game is over.
+2. Add to the lose screen the option to play the same pair of numbers again.
+3. Turn the Info Button modal into a menu with, for now, About and Tutorial options. The Tutorial will eventually be what is now bitgame-legends.
+
+I need to find a cleaner way of implementing the display mode in GameSpace. 
