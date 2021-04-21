@@ -9,7 +9,7 @@ export const doToken = (number, token, size) => {
     case ">":
       return Math.floor(number / 2);
     case "-":
-      if (number == 0) {
+      if (number === 0) {
         return 255
       }
       else {

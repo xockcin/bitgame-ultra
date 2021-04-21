@@ -106,4 +106,29 @@ Here are the next things I need to do:
 2. Add to the lose screen the option to play the same pair of numbers again.
 3. Turn the Info Button modal into a menu with, for now, About and Tutorial options. The Tutorial will eventually be what is now bitgame-legends.
 
-I need to find a cleaner way of implementing the display mode in GameSpace. 
+I need to find a cleaner way of implementing the display mode in GameSpace.
+
+### 4/15/21
+
+Just spent some time playing the game, and I must say that, with the difficulty level feature in place, it's actually starting to get kind of fun in an r/oddlysatisfying sort of way.
+
+I still have not implemented 1 and 2 of the list above. 3 was easy, although the buttons don't actually do anything.
+
+The next feature I need to start thinking about is making it so that you are actually achieving something when you solve the puzzles. I like the idea that the object of the game is to solve all 65,536 pairs of numbers, which sounds crazy except that achievements unlock powers, and eventually the power to solve the pairs of numbers in batches instead of one at a time.
+
+To get to Level 3, you should have to solve at least one of each of the 25 combinations of two tokens in Level 2. That seems like not too much to ask.
+
+### 4/21/21
+
+It has come to my attention that bitgame-ultra does not look good on mobile. And it's true: It only works horizontally, and even horizontally on very small screens the difficulty button spills out of the div. These don't seem like urgent problems, but I suppose they are. Here are three things I should do: 
+1. Add padding to the button divs so they don't get squished on small screens.
+2. Make the difficulty button responsive.
+3. Somehow force the user to hold the device vertically.
+
+Just set out to do it and realized I have no idea how to do it. In fact, I think it would be smarter to spend some time refactoring and cleaning up the code I have. Ultimately, here are the things I ought to do:
+1. Implement Redux.
+2. Implement styles as CSS instead of Bootstrap classes.
+3. Just generally clean up.
+
+And now here is a list of things I am actually doing, as I do them:
+1. Create component called "Main." Copy entire text of App.js into Main, and then turn App.js into a simple App.js type component.
