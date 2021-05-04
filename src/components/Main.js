@@ -152,7 +152,7 @@ class App extends Component {
 
   render() {
     return (
-      <div className="container p-2 my-5 border rounded">
+      <div className="container p-2 my-1 border rounded">
         <div className="d-flex p-2 rounded-pill border">
           <h1 className="p-2 ml-3 text-white">bitgame</h1>
           <ModeSwitch setMode={this.setMode} mode={this.state.mode} />
@@ -191,7 +191,7 @@ class App extends Component {
           />
         </div>
         <hr />
-        <div className="container-flex d-flex justify-content-center p-3">
+        <div className="container-flex d-flex justify-content-center p-1">
           <JukeBox />
         </div>
       </div>

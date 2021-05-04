@@ -132,3 +132,27 @@ Just set out to do it and realized I have no idea how to do it. In fact, I think
 
 And now here is a list of things I am actually doing, as I do them:
 1. Create component called "Main." Copy entire text of App.js into Main, and then turn App.js into a simple App.js type component.
+2. Read over the main component and think about it.
+
+OK, let's think about this. What all is the state, and what all are the actions?
+
+The state is:
+-The origin number and goal number
+-The steps array
+-The current number
+-The step count, which is a function of the origin and goal and the length of the steps array.
+-The difficulty
+-The display mode (i.e. dec, hex or ascii)
+-Whether or not the modal is displayed.
+-Whether the win, lose, or in-game screen is to be displayed
+
+The actions are:
+-do one of the five tokens
+-change the display mode
+-show or hide the modal
+-change the difficulty level
+-start a new game after winning or losing
+
+### 4/24/21
+
+Today I will put in redux.

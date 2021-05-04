@@ -13,9 +13,11 @@
     "react-bandcamp": "^1.1.5",
     "react-bootstrap": "^1.5.1",
     "react-dom": "^17.0.1",
+    "react-redux": "^7.2.3",
     "react-scripts": "4.0.3",
     "react-tiny-popover": "^6.0.5",
     "reactstrap": "^8.9.0",
+    "redux": "^4.0.5",
     "web-vitals": "^1.0.1"
   },
   "scripts": {

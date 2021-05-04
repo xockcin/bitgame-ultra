@@ -18,7 +18,8 @@ export const Byte = (props) => {
         </Button>
       );
     });
-    const classes = "d-flex rounded-pill justify-content-around";
+    const classes =
+      "d-flex mb-2 rounded-pill justify-content-around";
   return (
     <div className={props.showGoal ? "bg-danger " + classes : "bg-info " + classes}>
       <ButtonGroup className="p-2 d-flex flex-row-reverse">
@@ -32,33 +33,30 @@ const Keypad = ({handleButton}) => {
   const tokens = ["+", "<", "~", ">", "-"]
   const buttons = tokens.map(token => {
     return (
-      <Button 
+      <Button
         className="btn m-2 mx-lg-5 border btn-danger rounded btn-lg"
         onClick={() => handleButton(token)}
       >
         {token}
       </Button>
-    )
+    );
   })
   return (
     <div className="container d-flex bg-success rounded-pill justify-content-around">
-      <ButtonGroup>
-        {buttons}
-      </ButtonGroup>
+      <ButtonGroup>{buttons}</ButtonGroup>
     </div>
-  )
+  );
 }
 
 const GameBoard = (props) => {
   return (
-    <div class="container w-75 border rounded p-3 mt-2">
-      <Byte 
+    <div className="container w-75 border rounded p-3">
+      <Byte
         number={props.number}
         byte={props.byte} 
         goal={props.goal} 
         showGoal={props.showGoal} 
       />
-      <hr />
       <Keypad handleButton={props.handleButton} />
     </div>
   );

@@ -35,14 +35,16 @@ const albums = [
   "1823832688",
   "249810342",
   "2929730564",
-  "2611913199"
+  "2611913199",
+  "3951908514",
+  "203868434"
 ];
 
 const randomAlbum = albums[Math.floor(Math.random() * albums.length)];
 
 const JukeBox = (props) => {
   return (
-    <Container className="d-flex p-3 justify-content-center border">
+    <Container className="d-flex pt-4 pb-0 justify-content-center border">
       <BandcampPlayer
         BandcampPlayer
         album={randomAlbum}
