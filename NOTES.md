@@ -156,3 +156,27 @@ The actions are:
 ### 4/24/21
 
 Today I will put in redux.
+
+### 5/4/21
+
+I still haven't quite done redux. What I would like is to implement it in a smaller project before I put it into this one. But I also need to get this project ready to submit for NuCamp honors graduation. 
+
+I just made a few changes to the spacing, so it fits more comfortably in the browser window.
+
+I think before I put redux into this project, I will fill out the help modal.
+
+Ok, the help modal works.
+
+Let me take another stab at writing some concise documentation. This time I'll try aiming it at programmers rather than the layperson.
+
+BITGAME ULTRA is a casual game that teaches the fundamentals of bit manipulation, which is an important and fascinating topic in low-level programming.
+
+In the center of the window are two panels. The top panel, with the light blue background, displays the current number, represented in binary. The bottom panel, with the green background, has five buttons. The outer buttons, with the plus and minus signs, simply increment or decrement the current number. The buttons with the less-than and greater-than signs perform a left or right shift. So, in a left shift, every bit takes on the value of the bit immediately to its right. The rightmost bit is set to off; the value of the leftmost bit is lost. The middle button, with a tilde, performs a complement, which means simply that the value of every bit is reversed.
+
+Anyone who has used the C programming language should be familiar with these bitwise operations. Some might note that the increment and decrement symbols should actually be "++" and "--", and the shift symbols should be "<<" and ">>". That's how I had it originally, but I changed it for the sake of visual consistency.
+
+The two numbers above the panels are the origin and the goal. The origin is the number you start at; the goal is the number you are trying to get to. Every click of one of the five buttons counts as a move. The object of the game is to get from the origin to the goal in the minimum number of moves. The number to the right of the panels is the number of moves you have. To see a binary representation of the goal number, simply mouse over it.
+
+You may adjust the difficulty using the pulldown menu in the top righthand corner. The difficulty corresponds to the number of moves required to get from the origin to the goal. By default, the difficulty is set to 3, which means that every pair of numbers you are given will be solvable in a minimum of three moves.
+
+You may also adjust the display mode using the blue switch at the top. You may view the origin, goal, and intermediate values as decimal numbers, hexadecimal numbers, or ASCII characters.
